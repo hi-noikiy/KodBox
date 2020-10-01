@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<?php $this->link('style/dist/main.css','static');?>
-<?php $this->link('style/lib/alifont/iconfont.css','staticApp');?>
-<?php $this->link('style/lib/icomoon/style.css','staticApp');?>
-
+<?php $this->link();?>
 <style type="text/css">
 	html body{
 		font-family:-apple-system,BlinkMacSystemFont,PingFang SC,
@@ -54,7 +51,6 @@
 
 	div.navbar .nav{position: static;}
 	.nav.word-tab-title .dropdown.word-tab-title-li{position:absolute;left:0px;}
-	div.navbar-inverse .nav>li>a.dropdown-toggle{}
 	ul.dropdown-menu{margin-top:0;border-radius:2px;border: 1px solid rgba(0,0,0,0.1);}
 	ul.dropdown-menu>li>a:hover, 
 	ul.dropdown-menu>li>a:focus, 
@@ -83,8 +79,6 @@
 	}
 
 	#next:after, #prev:after{color:#222;margin-left:-25px;}
-	#prev:after{content: "\f104";}
-	#next:after{content: "\f105";}
 	/*excle*/
 	@media (max-width: 979px) {
 		div.navbar-inverse .nav-collapse .nav>li>a:hover, 
@@ -126,9 +120,6 @@
 		background: #fff;
 		border-radius: 2px;
 	}
-	.changePage .pageUp:after {content:"\ea28";font-family: 'icomoon';}
-	.changePage .pageDown:after {content:"\ea29";font-family: 'icomoon';}
-	
 	div #rotateLeft,div #rotateRight,
 	div .pageUp,div .pageDown{
 		width: 30px;height: 30px;line-height:30px;
@@ -146,9 +137,11 @@
 	div .pageUp,div .pageDown{margin-top:-3px;}
 	
 	#rotateLeft img,#rotateRight img{display:none;}
-	#rotateLeft:before{content:"\f0e2";font-family: 'icomoon';}
-	#rotateRight:before{content:"\f01e";font-family: 'icomoon';}
 	
+	#prev:after,.changePage .pageUp:after{content:"\ea64";font-family: 'remixicon';}
+	.changePage .pageDown:after,#next:after{content:"\ea6e";font-family: 'remixicon';}
+	#rotateLeft:before{content:"\ea3a";font-family: 'remixicon';}
+	#rotateRight:before{content:"\eb93";font-family: 'remixicon';}
 	<?php 
 		$doc = array('doc','docx','docm','dot','dotx','dotm','rtf',  'wps','wpt');
 		if(in_array(get_path_ext($app->filePath),$doc)){
@@ -164,7 +157,3 @@
 		window.addEventListener = window.attachEvent;
 	}
 </script>
-<link rel="stylesheet" href="<?php echo STATIC_PATH;?>style/lib/main.css" type="text/css">
-<!--[if IE 7]>
-<link rel="stylesheet" href="./static/style/font-awesome/css/font-awesome-ie7.css">
-<![endif]--> 

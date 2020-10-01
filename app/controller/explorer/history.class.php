@@ -46,7 +46,7 @@ class explorerHistory extends Controller{
 	 * 删除某个文件的某个版本;
 	 */
 	public function remove() {
-		$id  = $this->checkItem();
+		$id  = $this->checkItem();pr(123);exit;
 		$res = $this->model->removeItem($id);
 		$msg = !!$res ? LNG('explorer.success') : LNG('explorer.error');
 		show_json($msg,!!$res);

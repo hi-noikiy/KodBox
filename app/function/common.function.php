@@ -192,14 +192,19 @@ function obj2array($obj){
 	} 
 }
 
+function ignore_timeout(){
+	@ignore_user_abort(true);
+	set_timeout();
+}
+
 // 48 * 60 * 60
-function ignore_timeout($timeout=172800){
+function set_timeout($timeout=172800){
 	static $firstRun = false;
 	if($firstRun) return; //避免重复调用; 5000次100ms;
-
 	$firstRun = true;
-	@ignore_user_abort(true);
+	
 	@ini_set("max_execution_time",$timeout);
+	@ini_set('request_terminate_timeout',$timeout);
 	@set_time_limit($timeout);
 	@ini_set('memory_limit', '4000M');//4G;
 }

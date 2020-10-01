@@ -67,6 +67,7 @@ function think_exception($msg) {
 	write_log($desc.';'.$error."\n".get_caller_msg(),'error');
     if(defined('GLOBAL_DEBUG') && !GLOBAL_DEBUG ){
 		$error = "<div class='desc'>$desc</div>".$error;
+		$error = str_replace(BASIC_PATH,'./',$error); //去除路径前缀;
         show_tips($error,'',0,'',false);
     }else{
 		if(is_object($msg)){ //系统错误或警告;
@@ -184,7 +185,11 @@ function think_config($name = null, $value = null) {
  */
 function think_parse_name($name, $type = 0) {
     if ($type) {
-        return ucfirst(preg_replace("/_([a-zA-Z])/e", "strtoupper('\\1')", $name));
+		$result = preg_replace_callback("/_([a-zA-Z])/", function($matches) {
+			return strtoupper($matches[1]);
+		},$name);
+		return ucfirst($result);
+        // return ucfirst(@preg_replace("/_([a-zA-Z])/e", "strtoupper('\\1')", $name));
     } else {
         return lcfirst($name);//数据库字段以小驼峰命名方式
         // return strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $name), "_"));
@@ -309,6 +314,9 @@ function think_trace($value = '[think]', $label = '', $level = 'DEBUG', $record 
 		$level = 'SQL';
 		if(!isset($_trace[$level])){
 			return $_trace;
+		}
+		if(empty($_trace[$level]['sql'])){
+			$_trace[$level]['sql'] = array();
 		}
 		$_trace[$level] = array_merge($_trace[$level]['sql'],$_trace[$level]);
 		$_trace[$level]['timeTotal'] = sprintf("%.4f",$_trace[$level]['timeTotal']);
