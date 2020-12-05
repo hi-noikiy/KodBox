@@ -26,6 +26,9 @@ class Html{
 	public static function onlyImage($data){
 		require_once SDK_DIR.'HtmlPurifier/HTMLPurifier.auto.php';
 		$config = HTMLPurifier_Config::createDefault();
+		
+		$config->set('Cache.SerializerPath', TEMP_PATH);// 缓存目录;
+		$config->set('Cache.DefinitionImpl', null);
 		$config->set('HTML.Allowed','img[src]');
 		$cleanObj = new HTMLPurifier($config);
 		return $cleanObj->purify($data);

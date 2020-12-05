@@ -42,10 +42,11 @@ class filterPost extends Controller{
 			'explorer.share'	=> 'file,fileOut,fileDownload,zipDownload',
 			
 			'install.index'	 	=> '*',
-			'user.index' 		=> 'index,loginSubmit',//accessTokenGet logout
+			'user.index' 		=> 'index,loginSubmit,logout',//accessTokenGet logout
 			'user.view'	 		=> '*',
 			'user.sso'			=> '*',
 			'test.debug'		=> '*',
+			'test.language'		=> '*',
 		);
 		$allowGet  = false;
 		$ST_MOD = strtolower(MOD.'.'.ST);

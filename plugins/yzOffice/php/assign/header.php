@@ -90,7 +90,6 @@
 	}
 	#btnPrint{filter: invert(60%);}
 	#zoom{display:none !important;}
-
 	.changePage .pageUp:after{content: "";font-family: FontAwesome;}
 	.changePage .pageDown:after {content: "";font-family: FontAwesome;}
 	.changePage .pageUp,.changePage .pageDown{font-size:16px;background:transparent !important;color:#888;text-decoration: none;}
@@ -112,7 +111,7 @@
 
 	div.navbar-inverse{background: none !important;border:none !important;}
 	div.navbar-inverse .brand {width: 40% !important;}
-	div.changePage .activePage {height: 24px;line-height: 24px;}
+	div.changePage .activePage {height:16px;line-height:16px;}
 	div.container-fluid.container-fluid-content{background:#eeeef4;}
 	div.word-page {
 		border: none;
@@ -134,8 +133,7 @@
 	div .pageUp:hover,div .pageDown:hover{
 		background:rgba(0,0,0,0.1) !important;
 	}
-	div .pageUp,div .pageDown{margin-top:-3px;}
-	
+	div .pageUp,div .pageDown{margin-top:-5px;}
 	#rotateLeft img,#rotateRight img{display:none;}
 	
 	#prev:after,.changePage .pageUp:after{content:"\ea64";font-family: 'remixicon';}

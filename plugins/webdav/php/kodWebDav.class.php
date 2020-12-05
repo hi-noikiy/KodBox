@@ -29,6 +29,7 @@ class kodWebDav extends HttpDavServer {
 		$userInfo = Session::get("kodUser");
 	    if(!$userInfo || !is_array($userInfo)){
     	    $user = HttpAuth::get();
+    	    $this->plugin->log($user);
     		$find = ActionCall('user.index.userInfo', $user['user'],$user['pass']);
     		if ( !is_array($find) || !isset($find['userID']) ){
     			return HttpAuth::error();
@@ -192,7 +193,7 @@ class kodWebDav extends HttpDavServer {
 		$io = IO::init('/');
 		if($io->pathFather($pathUrl) == $io->pathFather($destURL)){
 			if(!$this->can($path,'edit')) return false;
-			$this->plugin->log("move rename=$path;$pathUrl;$destURL;dest=".intval($this->pathExists($dest)));
+			$this->plugin->log("move edit=$path;$pathUrl;$destURL;dest=".intval($this->pathExists($dest)));
 			$fromExt = get_path_ext($pathUrl);
 			$toExt   = get_path_ext($destURL);
 			$officeExt = array('doc','docx','xls','xlsx','ppt','pptx');
@@ -203,18 +204,17 @@ class kodWebDav extends HttpDavServer {
 			 * 2. 移动 ~tmp1601041332501525796.TMP => test.docx; 	// 改造;目标文件已存在则更新文件;删除原文件;
 			 * 3. 删除 test~388C66.tmp  
 			 */
-			if( $this->isWindows() && $toExt == 'tmp' && 
-			    in_array($fromExt,$officeExt) ){
-			    $result =  IO::mkfile($dest);
-			    $this->plugin->log("move skip=$path;$pathUrl;$destURL;res=".$result);
+			if( $this->isWindows() && $toExt == 'tmp' && in_array($fromExt,$officeExt) ){
+				$result =  IO::mkfile($dest);
+			    $this->plugin->log("move mkfile=$path;$pathUrl;$destURL;res=".$result);
 			    return $result;
 			}
-			
 			// 都存在则覆盖；
-			if( $this->pathExists($path) && 
-				$this->pathExists($dest) ){
-    			return IO::saveFile($path,$dest);
-    		}
+			if( $this->pathExists($path) && $this->pathExists($dest) ){
+				$result = IO::saveFile($path,$dest);
+				$this->plugin->log("move saveFile=$path;res=".$dest.';res='.$result);
+				return $result;
+			}			
 			return IO::rename($path,$io->pathThis($destURL));
 		}
 		

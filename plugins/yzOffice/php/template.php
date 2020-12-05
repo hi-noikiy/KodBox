@@ -2,6 +2,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=no" />
 	<meta charset="utf-8">
+	<?php $this->link();?>
 	<title><?php echo $fileName;?></title>
 	<style>
 		body {margin: 0;font-family: "Helvetica Neue Light", "Segoe UI Semilight", sans-serif;}
